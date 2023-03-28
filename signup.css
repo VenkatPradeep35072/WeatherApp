@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@200;400;600&display=swap");
+body{
+    font-family: "Lato",sans-serif;
+    display:flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 100vh;
+    background-image: url('C:\\Users\\aruna\\Downloads\\Weather\\icons\\image.svg');
+}
+form {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  
+  label, input[type="submit"] {
+    margin: 10px;
+  }
+  
+  input[type="text"], input[type="password"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    width: 300px;
+  }
+  
+  button[type="submit"] {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .typing {
+    position: relative;
+  }
+ 
+  .typing::after {
+    content: "|";
+    position: absolute;
+    right:0;
+    width: 100%;
+    color: black;
+    background: white;
+    -webkit-animation: typing 4s steps(100) forwards, caret 1s infinite;
+            animation: typing 4s steps(100) forwards, caret 1s infinite;
+  }
+  
+  @-webkit-keyframes typing {
+    to {
+      width: 0;
+    }
+  }
+  
+  @keyframes typing {
+    to {
+      width: 0;
+    }
+  }
+  @-webkit-keyframes caret {
+    50% {
+      color: transparent;
+    }
+  }
+  @keyframes caret {
+    50% {
+      color: transparent;
+    }
+  }

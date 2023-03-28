@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="signup.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    clifford: '#da373d',
+    },
+                }
+              }
+            }
+          </script>
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="flex h-screen justify-center w-screen items-center m-auto ">
+      <div class="lg:bg-signup lg:bg-no-repeat lg:bg-cover
+        lg:h-screen
+        lg:w-[80%] ">
+        <img class="lg:absolute lg:h-20 lg:mt-2.5 lg:ml-5
+          lg:cursor-pointer" 
+          alt="WeatherApp" />
+      </div>
+      <form onSubmit="submitForm(event)">
+        <h1 class="typing text-gray-900 tracking-tighter text-[48px]">
+          Login
+        </h1>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit" value="Submit">Submit</button>
+        <span class="">New user? </span>
+        <a href="signup.html" class="cursor-pointer text-white
+          bg-blue-300 p-2 pl-5 pr-5
+          br-20">Signup</a>
+      </form>
+
+    </div>
+    <script>
+      function submitForm(event) {
+  event.preventDefault();
+
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+
+  fetch("http://127.0.0.1:8000/login", {
+    method: "POST",
+    body: JSON.stringify({ email, password }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // Parse response body as JSON
+      } else {
+        throw new Error("Invalid email or password. Please try again.");
+      }
+    })
+    .then((data) => {
+  // extract the access_token from the response data
+  const access_token = data["access_token"];
+
+  // set the cookie for userLoggedIn
+  let now = new Date();
+  let expirationDate = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // Expires in 30 days
+  document.cookie = "userLoggedIn=true; expires=" + expirationDate.toUTCString() + "; path=/";
+  
+  // set the cookie for email
+  document.cookie = "email=" + email + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+  // set the cookie for access_token
+  document.cookie = "access_token=" + access_token + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+  window.location.href = "index.html";
+})
+    .catch((error) => {
+      alert(error.message);
+      console.error(error);
+    });
+}
+
+let isLoggedIn = document.cookie.includes("userLoggedIn=true");
+
+
+</script>
+    <!-- <script src="login.js"></script> -->
+  </body>
+</html>

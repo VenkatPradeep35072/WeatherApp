@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="signup.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    clifford: '#da373d',
+                  }
+      },
+      backgroundImage: {
+        "signup":"url('C:\\Users\\aruna\\Downloads\\Weather\\icons\\image.png')"
+      },
+                }
+              }
+            
+          </script>
+    <title>Signup Page</title>
+  </head>
+  <body>
+    <div class="flex h-screen justify-center w-screen items-center m-auto ">
+      <div class="lg:bg-login lg:bg-no-repeat lg:bg-cover lg:h-screen
+        lg:w-[80%]">
+      </div>
+      <form id="signup-form" onSubmit="submitForm(event)">
+        <h1 class="typing text-gray-900 tracking-tighter text-[48px]">
+          Signup
+        </h1>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="name">City1:</label>
+        <input type="text" id="city1" name="city1" required>
+        <label for="name">City2:</label>
+        <input type="text" id="city2" name="city2" required>
+        <label for="name">City3:</label>
+        <input type="text" id="city3" name="city3" required>
+        <button type="submit" value="Submit">Submit</button>
+        <span class="">Existing user? </span>
+        <a href="login.html" class="cursor-pointer text-white
+          bg-blue-300 p-2 pl-5 pr-5 br-20">Login</a>
+      </form>
+
+      <script>
+function submitForm() {
+  event.preventDefault();
+  let obj={
+    email:document.getElementById("email").value,
+    password:document.getElementById("password").value,
+    name:document.getElementById("name").value,
+    city:document.getElementById("city1").value,
+    city2:document.getElementById("city2").value,
+    city3:document.getElementById("city3").value
+  }
+  
+  fetch("http://127.0.0.1:8000/signup",{
+  method: "POST",
+  body: JSON.stringify(obj),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then((response) => {
+    alert("account created");
+    window.location.href= "login.html"
+}).catch((error) => console.error(error));
+}
+                </script>
+    </div>
+  </body>
+</html>

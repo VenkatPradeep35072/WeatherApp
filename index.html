@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Weather App in JavaScript </title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Linking BoxIcon for Icon -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header><i class='bx bx-left-arrow-alt'></i>Weather App</header>
+      <section class="input-part">
+        <p class="info-txt"></p>
+        <div class="content">
+          <input type="text" spellcheck="false" placeholder="Enter city name" required>
+          <div class="separator"></div>
+          <button>Get Device Location</button>
+        </div>
+      </section>
+      <section class="weather-part">
+        <img src="" alt="Weather Icon">
+        <div class="temp">
+          <span class="numb">_</span>
+          <span class="deg">°</span>C
+        </div>
+        <div class="weather">_ _</div>
+        <div class="location">
+          <i class='bx bx-map'></i>
+          <span>_, _</span>
+        </div>
+        <div class="bottom-details">
+          <div class="column feels">
+            <i class='bx bxs-thermometer'></i>
+            <div class="details">
+              <div class="temp">
+                <span class="numb-2">_</span>
+                <span class="deg">°</span>C
+              </div>
+              <p>Feels like</p>
+            </div>
+          </div>
+          <div class="column humidity">
+            <i class='bx bxs-droplet-half'></i>
+            <div class="details">
+              <span>_</span>
+              <p>Humidity</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <main id="main"></main>
+          <div class="weather-forecast">
+            <h2>7-Day Weather Forecast</h2>
+            <div class="weather-cards">
+                <div class="weather-card">
+                    <div class="day">Today</div>
+                    <div class="icon"><img src="" alt=""></div>
+                    <div class="description"></div>
+                    <div class="temp"></div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Tommorow</div>
+                    <div class="icon"><img src="" alt=""></div>
+                    <div class="description"></div>
+                    <div class="temp"></div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Day 3</div>
+                    <div class="icon"><img src="" alt=""></div>
+                    <div class="description"></div>
+                    <div class="temp"></div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Day 4</div>
+                    <div class="icon"><img src="" alt=""></div>
+                    <div class="description"></div>
+                    <div class="temp"></div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Day 5</div>
+                    <div class="icon"><img src="" alt=""></div>
+                    <div class="description"></div>
+                    <div class="temp"></div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Day 6</div>
+                    <div class="icon"><img src="" alt=""></div>
+                    <div class="description"></div>
+                    <div class="temp"></div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Day 7</div>
+                    <div class="icon"><img src="" alt=""></div>
+                    <div class="description"></div>
+                    <div class="temp"></div>
+                </div>
+            </div>
+        </div>
+        </div>
+      </section>
+    </div>
+    <button class="logoutButton" onclick="openModal()">Profile
+    </button>
+
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="model-body">
+          <p class="modal-heading">User Profile</p>
+          <div class="model-values">
+            <img src="./icons/image.svg" class="model-image"
+              alt="A beautiful
+              image">
+            <div class="model-row">
+              <h1 class="model-value1">Name: </h1>
+              <h2 class="model-value2" id="UserName"></h2>
+            </div>
+            <div class="model-row">
+              <h1 class="model-value1">Email: </h1>
+              <h2 class="model-value2" id="UserEmail"></h2>
+            </div>
+            <div class="model-row">
+              <h1 class="model-value1">City1: </h1>
+              <h2 class="model-value2" id="Usercity1"></h2>
+            </div>
+            <div class="model-row">
+              <h1 class="model-value1">City2: </h1>
+              <h2 class="model-value2" id="Usercity2"></h2>
+            </div>
+            <div class="model-row">
+              <h1 class="model-value1">City3: </h1>
+              <h2 class="model-value2" id="Usercity3"></h2>
+            </div>
+            <button onclick="logout()">Logout</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+        
+        let isLoggedIn = document.cookie.includes("userLoggedIn=true");
+
+        document.body.classList.toggle("user-logged-in", isLoggedIn);
+
+        if (!isLoggedIn) {
+          window.location.href = "login.html";
+        }
+        
+      });
+      function logout() {
+// perform any necessary cleanup or reset actions
+// such as clearing user data from local storage or resetting global variables
+
+// redirect the user to the login page
+// Get the current value of the userLoggedIn cookie
+let cookies = document.cookie.split(';');
+let userLoggedIn = cookies.find(cookie => cookie.trim().startsWith('userLoggedIn='));
+if (userLoggedIn) {
+userLoggedIn = userLoggedIn.split('=')[1];
+}
+
+// Update the userLoggedIn cookie value to "false"
+document.cookie = "userLoggedIn=false";
+
+window.location.href = "login.html";
+}
+    </script>
+
+    <script src="script.js"></script>
+    
+  </body>
+</html>
